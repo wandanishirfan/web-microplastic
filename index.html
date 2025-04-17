@@ -44,25 +44,6 @@
             z-index: 0;
         }
         
-        @keyframes float {
-            0% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-10px) rotate(5deg); }
-            100% { transform: translateY(0) rotate(0deg); }
-        }
-        
-        @keyframes drift {
-            0% { transform: translateX(0) translateY(0); }
-            25% { transform: translateX(10px) translateY(-5px); }
-            50% { transform: translateX(0) translateY(-10px); }
-            75% { transform: translateX(-10px) translateY(-5px); }
-            100% { transform: translateX(0) translateY(0); }
-        }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
         .header {
             background: linear-gradient(90deg, #1cb5e0 0%, #000851 100%);
             color: white;
@@ -98,113 +79,98 @@
             letter-spacing: 1px;
             opacity: 0.95;
         }
+
         .content {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             grid-gap: 18px;
             padding: 25px;
+            width: 100%;
         }
-        
+
+        /* Responsive Design */
         @media (max-width: 992px) {
             .content {
                 grid-template-columns: repeat(2, 1fr);
             }
-            
             .half-width {
                 grid-column: span 2;
             }
-            
             .full-width {
                 grid-column: span 2;
             }
         }
-        
+
         @media (max-width: 768px) {
             .header h1 {
                 font-size: 3rem;
             }
-            
             .content {
                 padding: 15px;
                 grid-gap: 15px;
             }
         }
-        
+
         @media (max-width: 576px) {
             .content {
                 grid-template-columns: 1fr;
                 padding: 10px;
                 grid-gap: 12px;
+                width: 100%; /* Ensures full width */
             }
-            
+
+            .section {
+                width: 100%; /* Ensures sections take full width */
+            }
+
             .half-width, .full-width {
                 grid-column: span 1;
             }
-            
+
             .header h1 {
                 font-size: 2.2rem;
             }
-            
+
             .header h2 {
                 font-size: 1.1rem;
             }
-            
-            .section {
-                padding: 15px;
-            }
-            
+
             .section-header span {
                 font-size: 1.8rem;
             }
-            
+
             .section-header h3 {
                 font-size: 1.2rem;
             }
-            
+
             .prevention-grid {
                 grid-template-columns: 1fr;
                 grid-gap: 8px;
             }
-            
+
             .icon-grid {
                 grid-template-columns: repeat(2, 1fr);
                 grid-gap: 8px;
             }
-            
-            .prevention-item {
-                padding: 8px;
-                font-size: 0.9rem;
+
+            /* Prevent overflow */
+            .section, .prevention-item, .icon-item, .dropdown-header {
+                word-wrap: break-word;
                 overflow: hidden;
-                text-overflow: ellipsis;
-                white-space: nowrap;
             }
-            
-            .prevention-item span {
-                font-size: 1.2rem;
-                min-width: 20px;
-            }
-            
-            .prevention-item div {
-                font-size: 0.85rem;
-                max-width: calc(100% - 30px);
+
+            .dropdown-content {
+                width: 100%;
                 overflow: hidden;
-                text-overflow: ellipsis;
+                word-wrap: break-word;
             }
-            
+
             .advanced-solutions {
                 word-break: break-word;
                 overflow-wrap: break-word;
                 white-space: normal;
-                font-size: 1rem !important; /* Increased font size for better visibility */
+                font-size: 1rem !important;
                 width: 100% !important;
-            }
-
-            .advanced-solutions p {
-                margin-bottom: 8px;
-                line-height: 1.3;
-                max-width: 100%;
-                overflow-wrap: break-word;
-                font-size: 1rem !important; /* Increased font size */
             }
 
             .dropdown.active .advanced-solutions {
@@ -212,7 +178,7 @@
                 max-height: 200px !important;
                 overflow-y: scroll !important;
             }
-            
+
             .dropdown-header {
                 padding: 8px 10px;
             }
@@ -220,62 +186,20 @@
             .dropdown-header h4 {
                 font-size: 0.9rem;
             }
-            
+
             .prevention-item {
                 padding: 8px;
             }
+
             .prevention-item span {
                 font-size: 1.2rem;
             }
+
             .prevention-item div {
                 font-size: 0.85rem;
             }
         }
-        
-        .section {
-            background-color: rgba(255, 255, 255, 0.9);
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
-            display: flex;
-            flex-direction: column;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .section:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
-        }
-        .section-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 15px;
-            border-bottom: 2px solid rgba(0, 8, 81, 0.1);
-            padding-bottom: 10px;
-        }
-        .section-header span {
-            font-size: 2rem;
-            margin-right: 12px;
-        }
-        .section-header h3 {
-            color: #000851;
-            margin: 0;
-            font-size: 1.4rem;
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 700;
-            letter-spacing: 0.5px;
-        }
-        .section p {
-            margin: 0;
-            line-height: 1.5;
-            font-size: 1rem;
-            color: #444;
-        }
-        .full-width {
-            grid-column: span 3;
-        }
-        .half-width {
-            grid-column: span 2;
-        }
+
         .footer {
             background: linear-gradient(90deg, #1cb5e0 0%, #000851 100%);
             color: white;
@@ -283,133 +207,6 @@
             text-align: center;
             font-size: 0.9rem;
             font-family: 'Montserrat', sans-serif;
-        }
-        
-        .author-info {
-            margin-top: 10px;
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 500;
-            font-size: 0.95rem;
-            letter-spacing: 0.5px;
-            line-height: 1.5;
-        }
-        .stat-box {
-            background: linear-gradient(135deg, #1cb5e0 0%, #000851 100%);
-            color: white;
-            padding: 15px;
-            border-radius: 8px;
-            text-align: center;
-            margin: 15px 0;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-        }
-        .stat-box .number {
-            font-size: 2.5rem;
-            font-weight: bold;
-            font-family: 'Montserrat', sans-serif;
-        }
-        .stat-box .label {
-            font-size: 0.9rem;
-            opacity: 0.9;
-            padding: 0 10px;
-        }
-        .prevention-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            grid-gap: 12px;
-            margin-bottom: 15px;
-        }
-        .prevention-item {
-            background-color: rgba(28, 181, 224, 0.1);
-            border-radius: 8px;
-            padding: 12px;
-            display: flex;
-            align-items: center;
-            transition: background-color 0.3s ease;
-        }
-        .prevention-item:hover {
-            background-color: rgba(28, 181, 224, 0.2);
-        }
-        .prevention-item span {
-            font-size: 1.6rem;
-            margin-right: 10px;
-            color: #1cb5e0;
-        }
-        .prevention-item div {
-            font-weight: 500;
-        }
-        .icon-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            grid-gap: 12px;
-            margin-top: 15px;
-        }
-        .icon-item {
-            background-color: rgba(28, 181, 224, 0.1);
-            border-radius: 8px;
-            padding: 15px 10px;
-            text-align: center;
-            transition: transform 0.3s ease, background-color 0.3s ease;
-        }
-        .icon-item:hover {
-            transform: translateY(-3px);
-            background-color: rgba(28, 181, 224, 0.2);
-        }
-        .icon-item span {
-            font-size: 2.2rem;
-            display: block;
-            margin-bottom: 8px;
-            color: #1cb5e0;
-        }
-        .icon-item p {
-            margin: 0;
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: #000851;
-        }
-        
-        .dropdown {
-            margin-top: 15px;
-        }
-        .dropdown-header {
-            background: linear-gradient(90deg, rgba(28, 181, 224, 0.2) 0%, rgba(0, 8, 81, 0.2) 100%);
-            padding: 10px 15px;
-            border-radius: 6px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            cursor: pointer;
-            transition: background 0.3s ease;
-        }
-        .dropdown-header:hover {
-            background: linear-gradient(90deg, rgba(28, 181, 224, 0.3) 0%, rgba(0, 8, 81, 0.3) 100%);
-        }
-        .dropdown-header h4 {
-            margin: 0;
-            font-size: 1rem;
-            font-weight: 600;
-            color: #000851;
-        }
-        .dropdown-content {
-            background-color: white;
-            border-radius: 0 0 6px 6px;
-            padding: 0;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.5s ease, padding 0.5s ease;
-            word-wrap: break-word;
-            overflow-y: auto;
-        }
-        .dropdown.active .dropdown-content {
-            max-height: 500px;
-            padding: 15px;
-            border: 1px solid rgba(28, 181, 224, 0.3);
-            border-top: none;
-        }
-        .dropdown-icon {
-            transition: transform 0.3s ease;
-        }
-        .dropdown.active .dropdown-icon {
-            transform: rotate(180deg);
         }
     </style>
 </head>
@@ -419,65 +216,14 @@
             <h1>MICROPLASTICS</h1>
             <h2>An Invisible Threat to Environmental & Human Health</h2>
         </div>
-        
+
         <div class="content">
-            <div class="section">
-                <div class="section-header">
-                    <span>🔬</span>
-                    <h3>WHAT ARE THEY?</h3>
-                </div>
-                <p>Tiny plastic particles <5mm that form from larger plastics breaking down or are manufactured for products like cosmetics and textiles.</p>
-                
-                <div class="stat-box pulse-animation">
-                    <div class="number">14M</div>
-                    <div class="label">TONS entering oceans annually</div>
-                </div>
-                
-                <div class="dropdown">
-                    <div class="dropdown-header">
-                        <h4>Learn More About Types</h4>
-                        <i class="dropdown-icon fas fa-chevron-down"></i>
-                    </div>
-                    <div class="dropdown-content">
-                        <p><strong>Primary microplastics</strong> are manufactured small (microbeads in cosmetics, pellets for manufacturing).</p>
-                        <p><strong>Secondary microplastics</strong> result from larger plastic items breaking down through weathering, UV exposure, and physical forces.</p>
-                        <p>Common types include polyethylene (PE), polypropylene (PP), polyethylene terephthalate (PET), and polystyrene (PS).</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="section">
-                <div class="section-header">
-                    <span>🌍</span>
-                    <h3>WHERE ARE THEY?</h3>
-                </div>
-                <p>Everywhere - oceans, drinking water, food, air, and even human blood, placenta, and breast milk.</p>
-                
-                <div class="stat-box pulse-animation">
-                    <div class="number">100%</div>
-                    <div class="label">of tested human samples contain microplastics</div>
-                </div>
-                
-                <div class="dropdown">
-                    <div class="dropdown-header">
-                        <h4>Environmental Distribution</h4>
-                        <i class="dropdown-icon fas fa-chevron-down"></i>
-                    </div>
-                    <div class="dropdown-content">
-                        <p><strong>Marine environments:</strong> From surface waters to deep-sea sediments, with particularly high concentrations in enclosed seas.</p>
-                        <p><strong>Freshwater:</strong> Lakes, rivers, and even groundwater systems show significant contamination.</p>
-                        <p><strong>Terrestrial systems:</strong> Soil contamination occurs through sewage sludge application, littering, and atmospheric deposition.</p>
-                        <p><strong>Remote areas:</strong> Found in Arctic sea ice, Antarctic waters, and high mountain lakes - truly global contamination.</p>
-                    </div>
-                </div>
-            </div>
-            
             <div class="section">
                 <div class="section-header">
                     <span>⚠️</span>
                     <h3>EXPOSURE ROUTES</h3>
                 </div>
-                
+
                 <div class="icon-grid">
                     <div class="icon-item">
                         <span>🍽️</span>
@@ -492,9 +238,9 @@
                         <p>SKIN CONTACT</p>
                     </div>
                 </div>
-                
+
                 <p style="margin-top: 15px;">We consume ~5g of plastic weekly (= one credit card!)</p>
-                
+
                 <div class="dropdown">
                     <div class="dropdown-header">
                         <h4>Detailed Exposure Pathways</h4>
@@ -508,59 +254,13 @@
                     </div>
                 </div>
             </div>
-            
-            <div class="section half-width">
-                <div class="section-header">
-                    <span>⚕️</span>
-                    <h3>HEALTH CONCERNS</h3>
-                </div>
-                
-                <div class="icon-grid" style="grid-template-columns: repeat(2, 1fr);">
-                    <div class="icon-item">
-                        <span>🧪</span>
-                        <p>CHEMICAL TOXICITY</p>
-                    </div>
-                    <div class="icon-item">
-                        <span>🔥</span>
-                        <p>INFLAMMATION</p>
-                    </div>
-                    <div class="icon-item">
-                        <span>🧠</span>
-                        <p>NEUROLOGICAL</p>
-                    </div>
-                    <div class="icon-item">
-                        <span>🦠</span>
-                        <p>MICROBIOME DISRUPTION</p>
-                    </div>
-                </div>
-                
-                <p style="margin-top: 15px;">Linked to endocrine disruption, oxidative stress, and reproductive harm. Particles can cross blood-brain barrier and placenta.</p>
-                
-                <div class="dropdown">
-                    <div class="dropdown-header">
-                        <h4>Emerging Health Research</h4>
-                        <i class="dropdown-icon fas fa-chevron-down"></i>
-                    </div>
-                    <div class="dropdown-content">
-                        <p><strong>Endocrine disruption:</strong> Chemicals like BPA and phthalates interfere with hormone systems, potentially affecting development, reproduction, and metabolism.</p>
-                        <p><strong>Immune system:</strong> Microplastics can trigger immune responses and chronic inflammation, potentially contributing to autoimmune conditions.</p>
-                        <p><strong>Gut health:</strong> Studies show microplastics alter gut microbiome composition and may damage intestinal lining.</p>
-                        <p><strong>Cellular damage:</strong> Nano-sized particles can enter cells and disrupt normal functions, potentially causing DNA damage.</p>
-                        <p><strong>Developmental effects:</strong> Prenatal and early life exposure may have long-term health consequences that are still being studied.</p>
-                    </div>
-                </div>
-            </div>
-            
+
             <div class="section">
                 <div class="section-header">
                     <span>🔍</span>
                     <h3>TOP SOURCES</h3>
                 </div>
-                
-                <div style="text-align: center; margin-bottom: 15px;">
-                    <span style="font-size: 1.2rem; font-weight: 600; color: #000851; font-family: 'Montserrat', sans-serif;">HIGHEST CONTAMINATION</span>
-                </div>
-                
+
                 <div class="prevention-grid" style="grid-template-columns: 1fr;">
                     <div class="prevention-item">
                         <span>🦪</span>
@@ -579,28 +279,25 @@
                         <div>Tire Dust</div>
                     </div>
                 </div>
-                
+
                 <div class="dropdown">
                     <div class="dropdown-header">
                         <h4>Source Details & Numbers</h4>
                         <i class="dropdown-icon fas fa-chevron-down"></i>
                     </div>
                     <div class="dropdown-content">
-                        <p><strong>Shellfish:</strong> Up to 10.5 microplastic particles per gram in mussels and oysters, which are filter feeders that concentrate particles.</p>
-                        <p><strong>Bottled water:</strong> Average of 325 microplastic particles per liter, compared to 5.5 particles per liter in tap water.</p>
-                        <p><strong>Synthetic clothing:</strong> A single wash of polyester clothing can release 700,000+ microfibers.</p>
-                        <p><strong>Tire wear:</strong> Produces 1kg of microplastic particles per car annually, contributing ~28% of ocean microplastics.</p>
-                        <p><strong>Tea bags:</strong> A single plastic tea bag can release billions of micro/nano plastic particles when steeped.</p>
+                        <p><strong>Shellfish:</strong> Up to 10.5 microplastic particles per gram in mussels and oysters.</p>
+                        <p><strong>Bottled water:</strong> Average of 325 microplastic particles per liter.</p>
                     </div>
                 </div>
             </div>
-            
+
             <div class="section full-width">
                 <div class="section-header">
                     <span>🛡️</span>
                     <h3>WHAT CAN WE DO?</h3>
                 </div>
-                
+
                 <div class="prevention-grid">
                     <div class="prevention-item">
                         <span>🧴</span>
@@ -627,7 +324,7 @@
                         <div>Fund research on microplastic impacts</div>
                     </div>
                 </div>
-                
+
                 <div class="dropdown">
                     <div class="dropdown-header">
                         <h4>Advanced Solutions & Research</h4>
@@ -635,15 +332,11 @@
                     </div>
                     <div class="dropdown-content advanced-solutions">
                         <p><strong>Improved wastewater treatment:</strong> Advanced filtration technologies can remove up to 99% of microplastics from wastewater.</p>
-                        <p><strong>Biodegradable alternatives:</strong> Research into truly biodegradable plastics from renewable resources is advancing.</p>
-                        <p><strong>Microplastic capture devices:</strong> Technologies like fiber-catching laundry balls and improved vacuum filters can reduce household microplastic emissions.</p>
-                        <p><strong>Circular economy approaches:</strong> Redesigning products for reuse, recycling, and reduced plastic dependency.</p>
-                        <p><strong>Bioremediation:</strong> Some microorganisms and enzymes show promise in breaking down certain types of microplastics.</p>
                     </div>
                 </div>
             </div>
         </div>
-        
+
         <div class="footer">
             <p>© 2025 - Based on scientific research from Smith et al. (2018), Rist et al. (2017), van Cauwenberghe & Janssen (2014), UNEP (2018)</p>
             <div class="author-info">
@@ -657,111 +350,21 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const dropdowns = document.querySelectorAll('.dropdown-header');
-            
+
             dropdowns.forEach(dropdown => {
                 dropdown.addEventListener('click', function() {
                     const parent = this.parentElement;
                     const isActive = parent.classList.contains('active');
-                    
+
                     document.querySelectorAll('.dropdown').forEach(item => {
                         item.classList.remove('active');
                     });
-                    
+
                     if (!isActive) {
                         parent.classList.add('active');
                     }
                 });
             });
-            
-            const poster = document.querySelector('.poster');
-            
-            const posterRect = poster.getBoundingClientRect();
-            const posterWidth = posterRect.width;
-            const posterHeight = posterRect.height;
-            
-            let particleCount = 40;
-            let fiberCount = 35;
-            
-            if (window.innerWidth < 768) {
-                particleCount = 20;
-                fiberCount = 15;
-            } else if (window.innerWidth < 992) {
-                particleCount = 30;
-                fiberCount = 25;
-            }
-            
-            createParticles(particleCount, fiberCount);
-            
-            window.addEventListener('resize', function() {
-                document.querySelectorAll('.micro-particle, .micro-fiber').forEach(el => {
-                    el.remove();
-                });
-                
-                let newParticleCount = 40;
-                let newFiberCount = 35;
-                
-                if (window.innerWidth < 768) {
-                    newParticleCount = 20;
-                    newFiberCount = 15;
-                } else if (window.innerWidth < 992) {
-                    newParticleCount = 30;
-                    newFiberCount = 25;
-                }
-                
-                createParticles(newParticleCount, newFiberCount);
-            });
-            
-            function createParticles(particleCount, fiberCount) {
-                for (let i = 0; i < particleCount; i++) {
-                    const particle = document.createElement('div');
-                    particle.className = 'micro-particle';
-                    
-                    const sizeMultiplier = window.innerWidth < 768 ? 0.8 : 1;
-                    const size = (Math.floor(Math.random() * 8) + 4) * sizeMultiplier;
-                    particle.style.width = size + 'px';
-                    particle.style.height = size + 'px';
-                    
-                    particle.style.left = Math.random() * 100 + '%';
-                    particle.style.top = Math.random() * 100 + '%';
-                    
-                    const opacity = Math.random() * 0.3 + 0.2;
-                    const hue = Math.floor(Math.random() * 40) + 190; // Blue to teal range
-                    particle.style.backgroundColor = `hsla(${hue}, 70%, 50%, ${opacity})`;
-                    
-                    const duration = Math.random() * 15 + 10;
-                    const delay = Math.random() * 5;
-                    particle.style.animation = `float ${duration}s ease-in-out ${delay}s infinite`;
-                    
-                    poster.appendChild(particle);
-                }
-                
-                for (let i = 0; i < fiberCount; i++) {
-                    const fiber = document.createElement('div');
-                    fiber.className = 'micro-fiber';
-                    
-                    fiber.style.left = Math.random() * 100 + '%';
-                    fiber.style.top = Math.random() * 100 + '%';
-                    
-                    const lengthMultiplier = window.innerWidth < 768 ? 0.7 : 1;
-                    const length = (Math.floor(Math.random() * 20) + 10) * lengthMultiplier;
-                    const width = Math.floor(Math.random() * 2) + 1;
-                    fiber.style.width = length + 'px';
-                    fiber.style.height = width + 'px';
-                    
-                    const rotation = Math.random() * 180;
-                    fiber.style.transform = `rotate(${rotation}deg)`;
-                    
-                    const opacity = Math.random() * 0.4 + 0.2;
-                    const hue = Math.floor(Math.random() * 60) + 180;
-                    fiber.style.backgroundColor = `hsla(${hue}, 70%, 60%, ${opacity})`;
-                    
-                    const duration = Math.random() * 25 + 20;
-                    const delay = Math.random() * 5;
-                    fiber.style.animation = `spin ${duration}s linear ${delay}s infinite`;
-                    
-                    poster.appendChild(fiber);
-                }
-            }
         });
     </script>
 </body>
