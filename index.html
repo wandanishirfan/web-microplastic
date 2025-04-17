@@ -1,4 +1,31 @@
-<!DOCTYPE html>
+/* Additional specific fix for Advanced Solutions dropdown */
+        .advanced-solutions {
+            max-height: 0;
+            overflow-y: auto !important;
+        }
+        
+        .dropdown.active .advanced-solutions {
+            max-height: 300px !important;
+        }
+        
+        @media (max-width: 576px) {
+            .advanced-solutions {
+                word-break: break-word;
+                overflow-wrap: break-word;
+                white-space: normal;
+                font-size: 0.9rem;
+            }
+            
+            .advanced-solutions p {
+                margin-bottom: 10px;
+                line-height: 1.4;
+                max-width: 100%;
+            }
+            
+            .dropdown.active .advanced-solutions {
+                padding: 12px;
+            }
+        }<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -598,7 +625,7 @@
                         <h4>Advanced Solutions & Research</h4>
                         <i class="dropdown-icon fas fa-chevron-down"></i>
                     </div>
-                    <div class="dropdown-content">
+                    <div class="dropdown-content advanced-solutions">
                         <p><strong>Improved wastewater treatment:</strong> Advanced filtration technologies can remove up to 99% of microplastics from wastewater.</p>
                         <p><strong>Biodegradable alternatives:</strong> Research into truly biodegradable plastics from renewable resources is advancing.</p>
                         <p><strong>Microplastic capture devices:</strong> Technologies like fiber-catching laundry balls and improved vacuum filters can reduce household microplastic emissions.</p>
