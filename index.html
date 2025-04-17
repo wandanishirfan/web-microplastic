@@ -1,31 +1,4 @@
-/* Additional specific fix for Advanced Solutions dropdown */
-        .advanced-solutions {
-            max-height: 0;
-            overflow-y: auto !important;
-        }
-        
-        .dropdown.active .advanced-solutions {
-            max-height: 300px !important;
-        }
-        
-        @media (max-width: 576px) {
-            .advanced-solutions {
-                word-break: break-word;
-                overflow-wrap: break-word;
-                white-space: normal;
-                font-size: 0.9rem;
-            }
-            
-            .advanced-solutions p {
-                margin-bottom: 10px;
-                line-height: 1.4;
-                max-width: 100%;
-            }
-            
-            .dropdown.active .advanced-solutions {
-                padding: 12px;
-            }
-        }<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -65,14 +38,6 @@
             z-index: 0;
         }
         
-        .micro-fragment {
-            position: absolute;
-            width: 0;
-            height: 0;
-            opacity: 0.5;
-            z-index: 0;
-        }
-        
         .micro-fiber {
             position: absolute;
             opacity: 0.5;
@@ -97,6 +62,7 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+        
         .header {
             background: linear-gradient(90deg, #1cb5e0 0%, #000851 100%);
             color: white;
@@ -139,7 +105,6 @@
             padding: 25px;
         }
         
-        /* Responsive adjustments */
         @media (max-width: 992px) {
             .content {
                 grid-template-columns: repeat(2, 1fr);
@@ -190,6 +155,7 @@
                 grid-template-columns: repeat(2, 1fr);
             }
         }
+        
         .section {
             background-color: rgba(255, 255, 255, 0.9);
             border-radius: 10px;
@@ -356,7 +322,6 @@
             transition: max-height 0.5s ease, padding 0.5s ease;
             word-wrap: break-word;
             overflow-y: auto;
-            max-height: 0;
         }
         .dropdown.active .dropdown-content {
             max-height: 500px;
@@ -371,7 +336,6 @@
             transform: rotate(180deg);
         }
         
-        /* Ensure dropdown content is scrollable and contained on mobile */
         @media (max-width: 576px) {
             .dropdown-content {
                 overflow-x: hidden;
@@ -386,16 +350,23 @@
                 font-size: 0.9rem;
                 margin-bottom: 8px;
             }
-        }
-        
-        /* Animation */
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-        .pulse-animation {
-            animation: pulse 2s infinite;
+            
+            .advanced-solutions {
+                word-break: break-word;
+                overflow-wrap: break-word;
+                white-space: normal;
+                font-size: 0.9rem;
+            }
+            .advanced-solutions p {
+                margin-bottom: 10px;
+                line-height: 1.4;
+                max-width: 100%;
+            }
+            .dropdown.active .advanced-solutions {
+                padding: 12px;
+                max-height: 300px;
+                overflow-y: auto;
+            }
         }
     </style>
 </head>
@@ -647,9 +618,7 @@
     </div>
 
     <script>
-        // JavaScript for dropdown functionality and microplastic animations
         document.addEventListener('DOMContentLoaded', function() {
-            // Dropdown functionality
             const dropdowns = document.querySelectorAll('.dropdown-header');
             
             dropdowns.forEach(dropdown => {
@@ -657,27 +626,22 @@
                     const parent = this.parentElement;
                     const isActive = parent.classList.contains('active');
                     
-                    // Close all dropdowns
                     document.querySelectorAll('.dropdown').forEach(item => {
                         item.classList.remove('active');
                     });
                     
-                    // If the clicked dropdown wasn't active, open it
                     if (!isActive) {
                         parent.classList.add('active');
                     }
                 });
             });
             
-            // Create animated microplastic elements
             const poster = document.querySelector('.poster');
             
-            // Get poster dimensions for responsive calculations
             const posterRect = poster.getBoundingClientRect();
             const posterWidth = posterRect.width;
             const posterHeight = posterRect.height;
             
-            // Adjust number of particles based on screen size
             let particleCount = 40;
             let fiberCount = 35;
             
@@ -689,75 +653,13 @@
                 fiberCount = 25;
             }
             
-            // Create microplastic particles (round beads)
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'micro-particle';
-                
-                // Random size between 4-12px, but smaller on mobile
-                const sizeMultiplier = window.innerWidth < 768 ? 0.8 : 1;
-                const size = (Math.floor(Math.random() * 8) + 4) * sizeMultiplier;
-                particle.style.width = size + 'px';
-                particle.style.height = size + 'px';
-                
-                // Random position
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.top = Math.random() * 100 + '%';
-                
-                // Random color (blues and teals)
-                const opacity = Math.random() * 0.3 + 0.2;
-                const hue = Math.floor(Math.random() * 40) + 190; // Blue to teal range
-                particle.style.backgroundColor = `hsla(${hue}, 70%, 50%, ${opacity})`;
-                
-                // Animation
-                const duration = Math.random() * 15 + 10;
-                const delay = Math.random() * 5;
-                particle.style.animation = `float ${duration}s ease-in-out ${delay}s infinite`;
-                
-                poster.appendChild(particle);
-            }
+            createParticles(particleCount, fiberCount);
             
-            // Create microplastic fibers (lines)
-            for (let i = 0; i < fiberCount; i++) {
-                const fiber = document.createElement('div');
-                fiber.className = 'micro-fiber';
-                
-                // Random position
-                fiber.style.left = Math.random() * 100 + '%';
-                fiber.style.top = Math.random() * 100 + '%';
-                
-                // Create line - smaller on mobile
-                const lengthMultiplier = window.innerWidth < 768 ? 0.7 : 1;
-                const length = (Math.floor(Math.random() * 20) + 10) * lengthMultiplier;
-                const width = Math.floor(Math.random() * 2) + 1;
-                fiber.style.width = length + 'px';
-                fiber.style.height = width + 'px';
-                
-                // Random rotation
-                const rotation = Math.random() * 180;
-                fiber.style.transform = `rotate(${rotation}deg)`;
-                
-                // Random color (light blues and teals)
-                const opacity = Math.random() * 0.4 + 0.2;
-                const hue = Math.floor(Math.random() * 60) + 180;
-                fiber.style.backgroundColor = `hsla(${hue}, 70%, 60%, ${opacity})`;
-                
-                // Animation
-                const duration = Math.random() * 25 + 20;
-                const delay = Math.random() * 5;
-                fiber.style.animation = `spin ${duration}s linear ${delay}s infinite`;
-                
-                poster.appendChild(fiber);
-            }
-            
-            // Handle window resize to adjust particles
             window.addEventListener('resize', function() {
-                // Remove existing particles to prevent accumulation
                 document.querySelectorAll('.micro-particle, .micro-fiber').forEach(el => {
                     el.remove();
                 });
                 
-                // Re-calculate particle counts
                 let newParticleCount = 40;
                 let newFiberCount = 35;
                 
@@ -769,32 +671,26 @@
                     newFiberCount = 25;
                 }
                 
-                // Create particles again with new counts and sizes
                 createParticles(newParticleCount, newFiberCount);
             });
             
             function createParticles(particleCount, fiberCount) {
-                // Create microplastic particles (round beads)
                 for (let i = 0; i < particleCount; i++) {
                     const particle = document.createElement('div');
                     particle.className = 'micro-particle';
                     
-                    // Random size between 4-12px, but smaller on mobile
                     const sizeMultiplier = window.innerWidth < 768 ? 0.8 : 1;
                     const size = (Math.floor(Math.random() * 8) + 4) * sizeMultiplier;
                     particle.style.width = size + 'px';
                     particle.style.height = size + 'px';
                     
-                    // Random position
                     particle.style.left = Math.random() * 100 + '%';
                     particle.style.top = Math.random() * 100 + '%';
                     
-                    // Random color (blues and teals)
                     const opacity = Math.random() * 0.3 + 0.2;
-                    const hue = Math.floor(Math.random() * 40) + 190; // Blue to teal range
+                    const hue = Math.floor(Math.random() * 40) + 190;
                     particle.style.backgroundColor = `hsla(${hue}, 70%, 50%, ${opacity})`;
                     
-                    // Animation
                     const duration = Math.random() * 15 + 10;
                     const delay = Math.random() * 5;
                     particle.style.animation = `float ${duration}s ease-in-out ${delay}s infinite`;
@@ -802,32 +698,26 @@
                     poster.appendChild(particle);
                 }
                 
-                // Create microplastic fibers (lines)
                 for (let i = 0; i < fiberCount; i++) {
                     const fiber = document.createElement('div');
                     fiber.className = 'micro-fiber';
                     
-                    // Random position
                     fiber.style.left = Math.random() * 100 + '%';
                     fiber.style.top = Math.random() * 100 + '%';
                     
-                    // Create line - smaller on mobile
                     const lengthMultiplier = window.innerWidth < 768 ? 0.7 : 1;
                     const length = (Math.floor(Math.random() * 20) + 10) * lengthMultiplier;
                     const width = Math.floor(Math.random() * 2) + 1;
                     fiber.style.width = length + 'px';
                     fiber.style.height = width + 'px';
                     
-                    // Random rotation
                     const rotation = Math.random() * 180;
                     fiber.style.transform = `rotate(${rotation}deg)`;
                     
-                    // Random color (light blues and teals)
                     const opacity = Math.random() * 0.4 + 0.2;
                     const hue = Math.floor(Math.random() * 60) + 180;
                     fiber.style.backgroundColor = `hsla(${hue}, 70%, 60%, ${opacity})`;
                     
-                    // Animation
                     const duration = Math.random() * 25 + 20;
                     const delay = Math.random() * 5;
                     fiber.style.animation = `spin ${duration}s linear ${delay}s infinite`;
@@ -837,5 +727,3 @@
             }
         });
     </script>
-</body>
-</html>
