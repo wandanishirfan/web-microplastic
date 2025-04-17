@@ -327,6 +327,9 @@
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.5s ease, padding 0.5s ease;
+            word-wrap: break-word;
+            overflow-y: auto;
+            max-height: 0;
         }
         .dropdown.active .dropdown-content {
             max-height: 500px;
@@ -339,6 +342,23 @@
         }
         .dropdown.active .dropdown-icon {
             transform: rotate(180deg);
+        }
+        
+        /* Ensure dropdown content is scrollable and contained on mobile */
+        @media (max-width: 576px) {
+            .dropdown-content {
+                overflow-x: hidden;
+                overflow-y: auto;
+                max-height: 0;
+                width: 100%;
+            }
+            .dropdown.active .dropdown-content {
+                max-height: 300px;
+            }
+            .dropdown-content p {
+                font-size: 0.9rem;
+                margin-bottom: 8px;
+            }
         }
         
         /* Animation */
